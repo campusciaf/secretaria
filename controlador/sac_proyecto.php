@@ -467,7 +467,7 @@ switch ($_GET["op"]) {
 								</div>
 							</div>
 							<div class="col">
-								<p class="small text-secondary mb-1">Proyectos</p>
+								<p class="small text-secondary mb-1">Proyectos/objetivos</p>
 								<h4 class="fw-medium"  class="btn btn-link">' . count($proyectos) . '</h4>
 							</div>
 						</div>
@@ -493,7 +493,7 @@ switch ($_GET["op"]) {
 								</div>
 							</div>
 							<div class="col">
-								<p class="small text-secondary mb-1">Acciones</p>
+								<p class="small text-secondary mb-1">Estrategías</p>
 								<h4 class="fw-medium " class="btn btn-link">' . $numero_total_acciones . ' </h4>
 							</div>
 						</div>
@@ -507,7 +507,7 @@ switch ($_GET["op"]) {
 								</div>
 							</div>
 							<div class="col">
-								<p class="small text-secondary mb-1">Tareas</p>
+								<p class="small text-secondary mb-1">Acciones</p>
 								<h4 class="fw-medium " class="btn btn-link">' . count($total_tareas_reporte) . ' </h4>
 							</div>
 						</div>
