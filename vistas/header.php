@@ -365,7 +365,7 @@ $activado = (isset($activado)) ? $activado : "";
                                 } // condicional para el boton activado
                                 echo '<li class="nav-item">
                                                     <a href="sactareas.php" class="nav-link ' . $activo . '">
-                                                        <p>Mi POA</p>
+                                                        <p>Mi plan</p>
                                                     </a>
                                                 </li>';
                             }
