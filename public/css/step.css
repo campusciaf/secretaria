@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis:600&display=swap');
+*{
+	font-family: 'Dosis', sans-serif ;
+
+}
+.preloader-box{
+	position: fixed;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999999999999;
+    overflow: hidden;
+    background: url(../img/gif_createc.gif) no-repeat center center;
+    background-color: white;
+}
+
+.ui-timepicker-container {
+      z-index: 3500 !important;
+ }
+
+.f1 {
+	padding: 25px; background: #fff;
+	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+}
+.f1 h3 { margin-top: 0; margin-bottom: 5px; text-transform: uppercase; }
+
+.f1-steps { overflow: hidden; position: relative; margin-top: 20px; }
+
+.f1-progress { position: absolute; top: 24px; left: 0; width: 100%; height: 1px; background: #ddd; }
+.f1-progress-line { position: absolute; top: 0; left: 0; height: 1px; background: #0164ca !important; }
+
+.f1-step { position: relative; float: left; width: 20%; padding: 0 5px; }
+
+.f1-step-icon {
+	display: inline-block; width: 40px; height: 40px; margin-top: 4px; background: #ddd;
+	font-size: 16px; color: #fff; line-height: 40px;
+	-moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%;
+}
+.f1-step.activated .f1-step-icon {
+	background: #fff; border: 1px solid #0164ca !important; color: #0164ca !important; line-height: 38px;
+}
+.f1-step.active .f1-step-icon {
+	width: 48px; height: 48px; margin-top: 0; background: #0164ca !important; font-size: 22px; line-height: 48px;
+}
+
+.f1-step p { color: #ccc; }
+.f1-step.activated p { color: #0164ca !important; }
+.f1-step.active p { color: #0164ca !important; }
+
+.f1 fieldset { display: none; text-align: left; }
+
+.f1-buttons { text-align: right; }
+
+.f1 .input-error { border-color: #0164ca !important; }
+
+@media (max-width: 500px) {
+	
+	h1, h2 { font-size: 32px; }
+	
+	.f1 { padding-bottom: 20px; }
+	.f1-buttons button { margin-bottom: 5px; }
+    .title-two{
+        font-size: 15px !important;
+    }
+
+}
+@media (max-width: 200px) {
+	
+	h1, h2 { font-size: 32px; }
+	
+	.f1 { padding-bottom: 20px; }
+	.f1-buttons button { margin-bottom: 5px; }
+    .title-two{
+        font-size: 15px !important;
+    }
+
+}
+/*Switch para la habilitacion o deshabilitacion de inputs*/
+.switch {
+	  color: #fff;
+	  font-size: 13px;
+	  font-weight: normal;
+	  line-height: 20px;
+	  position: relative;
+	  height: 26px;
+	  width: 120px;
+	  border-radius: 3px;
+	  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	}
+
+	.switch-label {
+	  position: relative;
+	  z-index: 2;
+	  float: left;
+	  width: 58px;
+	  line-height: 26px;
+	  font-size: 11px;
+	  color: #fff;
+	  text-align: center;
+	  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+	  cursor: pointer;
+	}
+	.switch-label:active {
+	  font-weight: bold;
+	}
+
+	.switch-label-off {
+	  padding-left: 2px;
+	}
+
+	.switch-label-on {
+	  padding-right: 2px;
+	}
+
+
+	.switch-input {
+	  display: none;
+	}
+	.switch-input:checked + .switch-label {
+	  font-weight: bold;
+	  color: rgba(0, 0, 0, 0.65);
+	  text-shadow: 0 1px rgba(255, 255, 255, 0.25);
+	  -webkit-transition: 0.15s ease-out;
+	  -moz-transition: 0.15s ease-out;
+	  -ms-transition: 0.15s ease-out;
+	  -o-transition: 0.15s ease-out;
+	  transition: 0.15s ease-out;
+	  -webkit-transition-property: color, text-shadow;
+	  -moz-transition-property: color, text-shadow;
+	  -ms-transition-property: color, text-shadow;
+	  -o-transition-property: color, text-shadow;
+	  transition-property: color, text-shadow;
+	}
+	.switch-input:checked + .switch-label-on ~ .switch-selection {
+	  left: 60px;
+	  /* Note: left: 50%; doesn't transition in WebKit */
+	}
+
+	.switch-selection {
+	  position: absolute;
+	  z-index: 1;
+	  top: 2px;
+	  left: 2px;
+	  display: block;
+	  width: 58px;
+	  height: 22px;
+	  background-color: #ffffff;
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #ffffff));
+	  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+	  background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+	  background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
+	  background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+	  background-image: linear-gradient(top, #ffffff, #ffffff);
+	  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+	  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+	  -webkit-transition: left 0.15s ease-out;
+	  -moz-transition: left 0.15s ease-out;
+	  -ms-transition: left 0.15s ease-out;
+	  -o-transition: left 0.15s ease-out;
+	  transition: left 0.15s ease-out;
+	}
+.form-header, .form-header:focus{
+	background:#00a65a;
+	color: #fff;
+}
+.form-header:hover{
+	background:#00a65a;
+	color: #fff;
+}
+
+
+/*Modales Centrados Verticalmente*/
+.modal {
+  text-align: center;
+}
+
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+    .title-two{
+        font-size: 20px !important;
+    }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+/* ------------------- Loader charge */
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 32px 32px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  margin: -3px 0 0 -3px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 50px;
+  left: 50px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 54px;
+  left: 45px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 57px;
+  left: 39px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 58px;
+  left: 32px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 57px;
+  left: 25px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 54px;
+  left: 19px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 50px;
+  left: 14px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 45px;
+  left: 10px;
+}
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/*---------------------------------------------*/
+.timeline>li>.fa, .timeline>li>.glyphicon, .timeline>li>.ion {
+    width: 58px;
+    border-radius: 4px;
+}
+.span-clock{
+	width:30px !important;
+	height:30px !important;
+	font-size:15px !important;
+	line-height:30px !important;
+	position:absolute !important;
+	color:#666 !important;
+	background:#d2d6de !important;
+	border-radius:50% !important;
+	text-align:center !important;
+	left:18px !important;
+}
+
+.popover-title{
+    background: #00c0ef;
+	color: white;
+	
+}
+.popover{
+	width: 300px !important;
+}
+.custom {
+   cursor:url('../images/check-value.png'), auto !important;
+}
+
+
+/*-------------------------- CHECK CON MORA*/
+.label-check-permisos{
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.input-check-permisos{
+	display: none;
+}
+
+.circle{
+	width: 20px;
+	height: 20px;
+	background-color: lightcyan;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color .3s;
+}
+.circle > i{
+	opacity: 0;
+	transition: opacity .3s;
+	color: forestgreen;
+}
+input.input-check-permisos:checked + label>.circle{
+	background-color: transparent;
+}
+input.input-check-permisos:checked + label>.circle>i{
+	opacity: 1;
+}
+.btn-new {
+    background-color: #ffffff;
+	color: #000000;
+	border-radius: 0px;
+	border: 1px solid #ced4da;
+}
+
+/*----------------------------------------------- incluir mora ---------------------------------*/
+#tabla_intereses_mora >.row > th{
+	width: 0px !important;
+} 
+
+.loader{
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+#loader-2 span{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: #3498db;
+  margin: 35px 5px;
+}
+
+#loader-2 span:nth-child(1){
+  animation: bounce 1s ease-in-out infinite;
+}
+
+#loader-2 span:nth-child(2){
+  animation: bounce 1s ease-in-out 0.33s infinite;
+}
+
+#loader-2 span:nth-child(3){
+  animation: bounce 1s ease-in-out 0.66s infinite;
+}
+
+@keyframes bounce{
+  0%, 75%, 100%{
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  25%{
+    -webkit-transform: translateY(-20px);
+    -ms-transform: translateY(-20px);
+    -o-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+}
+
+
+a{
+  text-decoration: none;
+}
+
+.main-wrap {
+    background: #000;
+    text-align: center;
+}
+.main-wrap h1 {
+    color: #fff;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+
+.col:first-of-type {
+  	margin-left: 0;
+}
+
+.float-margin{
+	float: left;
+	background: white;
+	font-size: 17px;
+	margin-bottom: 5px;
+}
+
+.btn_pendientes{
+	padding-top: 8px;
+	padding-bottom: 9px;
+	font-size: 13px;
+}
+
+.box-profile-mat{
+  	background-color: #eee;
+  	padding: 50px 11px;
+}
+
+input[type="date"]::-webkit-clear-button,
+input[type="date"]::-webkit-outer-spin-button,
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
+}
+.buttons-pdf:hover{
+	background: #c82500;
+	color: white !important;
+}
+.buttons-pdf:hover span i{
+	color: white !important;
+}
+.button-back:hover{
+	background: #c82500;
+	color: white !important;
+}
+.button-back span i{
+	color: white !important;
+}
+.button-back{
+	background: #c82500;
+	color: white !important;
+}
+.button-back:hover span i{
+	color: white !important;
+}

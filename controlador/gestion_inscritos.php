@@ -1,0 +1,116 @@
+<?php
+session_start();
+require_once "../modelos/GestionInscritos.php";
+
+$consulta = new GestionInscritos();
+$id_usuario = isset($_SESSION["id_usuario"]) ? $_SESSION["id_usuario"] : die(json_encode(array("exito" => "0", "info" => "Sesion caducada, vuelva a iniciar por favor ")));
+
+$id_curso = isset($_POST["id_curso"]) ? $_POST["id_curso"] : "";
+$nombre_curso = isset($_POST["nombre_curso"]) ? $_POST["nombre_curso"] : "";
+$sede_curso = isset($_POST["sede_curso"]) ? $_POST["sede_curso"] : "";
+$precio_curso = isset($_POST["precio_curso"]) ? $_POST["precio_curso"] : "";
+$docente_curso = isset($_POST["docente_curso"]) ? $_POST["docente_curso"] : "";
+$modalidad_curso = isset($_POST["modalidad_curso"]) ? $_POST["modalidad_curso"] : "";
+$fecha_inicio = isset($_POST["fecha_inicio"]) ? $_POST["fecha_inicio"] : "";
+$fecha_fin = isset($_POST["fecha_fin"]) ? $_POST["fecha_fin"] : "";
+$estado_educacion = isset($_POST["estado_educacion"]) ? $_POST["estado_educacion"] : "";
+$descripcion_curso = isset($_POST["descripcion_curso"]) ? $_POST["descripcion_curso"] : "";
+$horario_curso = isset($_POST["horario_curso"]) ? $_POST["horario_curso"] : "";
+$categoria = isset($_POST["categoria"]) ? $_POST["categoria"] : "";
+$nivel_educacion = isset($_POST["nivel_educacion"]) ? $_POST["nivel_educacion"] : "";
+$duracion_educacion = isset($_POST["duracion_educacion"]) ? $_POST["duracion_educacion"] : "";
+$imagen = isset($_POST["imagen_curso"]) ? $_POST["imagen_curso"] : "";
+$color_estado = array('Proximamente' => "warning", 'Abierto' => "success", 'Cerrado' => "danger");
+$color_activo = array(0 => "danger", 1 => "success");
+$texto_activo = array(0 => "Inactivo", 1 => "Activo");
+$icon_button = array(0 => "fas fa-lock", 1 => "fas fa-lock-open");
+$function = array(0 => 1, 1 => 0);
+
+switch ($_GET["op"]) {
+    case 'listar':
+        //Vamos a declarar un array
+        $data = array();
+        $roll = ['Funcionario', 'Docente', 'Estudiante'];
+        //echo "$fecha_hoy, ".$_SESSION["id_usuario"];
+        for ($a=0; $a < count($roll) ; $a++) { 
+            $rspta = $consulta->listarInscritos($roll[$a]);
+            $estado = "";
+            //while ($rspta = $rspta[$i]["fetch_object"]()) {
+            for ($i = 0; $i < count($rspta); $i++) {
+                $nombre = ucfirst(mb_strtolower($rspta[$i]["usuario_nombre"] . " " . $rspta[$i]["usuario_nombre_2"] . " " . $rspta[$i]["usuario_apellido"] . " " . $rspta[$i]["usuario_apellido_2"], 'UTF-8'));
+                $data[] = array(
+                    "0" => '',
+                    "1" => $nombre,
+                    "2" => $rspta[$i]["nombre_curso"],
+                    "3" => $roll[$a],
+                    "4" => $rspta[$i]["estado_inscrito"],
+                    "5" => ($rspta[$i]["pago"] == 1)? "<span class='badge badge-success'> Pagado </span>": " <span class='badge badge-warning'> Pendiente </span>",
+                    "6" => $rspta[$i]["create_dt"],
+                );
+            }
+        }
+        $results = array(
+            "sEcho" => 1, //Información para el datatables
+            "iTotalRecords" => count($data), //enviamos el total registros al datatable
+            "iTotalDisplayRecords" => count($data), //enviamos el total registros a visualizar
+            "aaData" => $data
+        );
+        echo json_encode($results);
+        break;
+    case "mostrarCurso":
+        $rspta = $consulta->mostrarCurso($id_curso);
+        echo json_encode($rspta);
+        break;
+    case "eliminarCurso":
+        $rspta = $consulta->eliminarCurso($id_curso);
+        echo ($rspta) ? json_encode(array('status' => 1)) : json_encode(array('status' => 0,));
+        break;
+    case "estadoCurso":
+        //echo "$id_curso, $estado_educacion";
+        $rspta = $consulta->estadoCurso($id_curso, $estado_educacion);
+        echo ($rspta) ? json_encode(array('status' => 1)) : json_encode(array('status' => 0,));
+        break;
+    case "guardaryEditarCurso":
+        if (!file_exists($_FILES['imagen_curso']['tmp_name']) || !is_uploaded_file($_FILES['imagen_curso']['tmp_name'])) {
+            $imagen = $_POST["imagenactual"];
+        } else {
+            $ext = explode(".", $_FILES["imagen_curso"]["name"]);
+            if ($_FILES['imagen_curso']['type'] == "image/jpg" || $_FILES['imagen_curso']['type'] == "image/jpeg" || $_FILES['imagen_curso']['type'] == "image/png" || $_FILES['imagen_curso']['type'] == "application/pdf") {
+                $imagen = round(microtime(true)) . '.' . end($ext);
+                move_uploaded_file($_FILES["imagen_curso"]["tmp_name"], "../public/img_educacion/" . $imagen);
+            }
+        }
+
+        if (empty($id_curso)) {
+            $curso_stmt = $consulta->insertarCurso($nombre_curso, $docente_curso, $descripcion_curso, $modalidad_curso, $fecha_inicio, $fecha_fin, $horario_curso, $sede_curso, $precio_curso, $categoria, $nivel_educacion, $duracion_educacion, $imagen);
+        } else {
+            $curso_stmt = $consulta->editarCurso($id_curso, $nombre_curso, $docente_curso, $descripcion_curso, $modalidad_curso, $fecha_inicio, $fecha_fin, $horario_curso, $sede_curso, $precio_curso, $categoria, $nivel_educacion, $duracion_educacion, $imagen);
+        }
+
+        if ($curso_stmt) {
+            echo json_encode(array(
+                'status' => 1,
+                'valor' => "Realizado con éxito.",
+            ));
+        } else {
+            echo json_encode(array(
+                'status' => 0,
+                "valor" => "Ha ocurrido un error con el curso. err_code_095"
+            ));
+        }
+        break;
+    case 'listarDocentesActivos':
+        $rspta = $consulta->listarDocentesActivos();
+        //Vamos a declarar un array
+        $data["exito"] = 0;
+        $data["info"] = '<option value="" disabled selected> -- Selecciona un docente -- </option>
+                         <option value="    Por Definir"> Por Definir </option>';;
+        //while ($rspta = $rspta[$i]["fetch_object"]()) {
+        for ($i = 0; $i < count($rspta); $i++) {
+            $data["exito"] = 1;
+            $nombre = ucfirst(mb_strtolower($rspta[$i]["usuario_nombre"] . " " . $rspta[$i]["usuario_nombre_2"] . " " . $rspta[$i]["usuario_apellido"] . " " . $rspta[$i]["usuario_apellido_2"], 'UTF-8'));
+            $data["info"] .= '<option value="' . $rspta[$i]["id_usuario"] . '"> ' . $nombre . '</option>';
+        }
+        echo json_encode($data);
+        break;
+}

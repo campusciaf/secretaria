@@ -1,0 +1,247 @@
+var tabla;
+
+//Función que se ejecuta al inicio
+function init(){
+
+	mostrarform(false);
+	$("#precarga").hide();
+
+	//Cargamos los items de los selects contrato
+	$.post("../controlador/resultadoestudiante.php?op=selectPeriodo", function(r){
+		$("#periodo").html(r);
+		$('#periodo').selectpicker('refresh');
+	});
+
+	
+
+	$("#formulario").on("submit",function(e)
+	{
+		guardaryeditar(e);	
+	})
+}
+
+//Función limpiar
+function limpiar()
+{
+	$("#id_ejes").val("");
+	$("#nombre_ejes").val("");
+	$("#periodo").val("");
+	$("#objetivo").val("");
+
+}
+
+//Función mostrar formulario
+function mostrarform(flag)
+{
+	limpiar();
+	if (flag)
+	{
+		$("#listadoregistros").hide();
+		$("#formularioregistros").show();
+		$("#btnGuardar").prop("disabled",false);
+		$("#btnagregar").hide();
+	}
+	else
+	{
+		$("#listadoregistros").hide();
+		$("#formularioregistros").hide();
+		$("#btnagregar").show();
+	}
+}
+
+
+
+
+//Función cancelarform
+function cancelarform()
+{
+	limpiar();
+	mostrarform(false);
+}
+
+//Función Listar
+function listar(periodo_ingreso){
+$("#precarga").show();
+var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado");
+var f=new Date();
+var fecha_hoy=(diasSemana[f.getDay()] + ", " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+	
+	tabla=$('#tbllistado').dataTable(
+	{
+		"aProcessing": true,//Activamos el procesamiento del datatables
+	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+        buttons: [
+            {
+                extend:    'copyHtml5',
+                text:      '<i class="fa fa-copy fa-2x" style="color: blue"></i>',
+                titleAttr: 'Copy'
+            },
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel fa-2x" style="color: green"></i>',
+                titleAttr: 'Excel'
+            },
+			{
+                extend: 'print',
+			 	text: '<i class="fas fa-print fa-2x" style="color: #ff9900"></i>',
+                messageTop: '<div style="width:50%;float:left"><b>Asesor:</b>primer campo <b><br><b>Reporte:</b> segundo campo <b><br>Fecha Reporte:</b> '+fecha_hoy+' </div><div style="width:50%;float:left;text-align:right;margin-top:-30px; position:relative"><img src="../public/img/logo_ciaf_web.png" width="200px"><br><br></div>',
+				title: 'Ejes',
+			 	titleAttr: 'Print'
+            },
+
+        ],
+		"ajax":
+				{
+					url: '../controlador/resultadoestudiante.php?op=listar&periodo_ingreso='+periodo_ingreso,
+					type : "get",
+					dataType : "json",	
+					error: function(e){
+						console.log(e.responseText);	
+					},
+					
+				},
+		
+			"bDestroy": true,
+            "iDisplayLength": 10,//Paginación
+			'initComplete': function (settings, json) {
+				$("#precarga").hide();
+				$("#listadoregistros").show();
+			},
+
+		
+		
+	// funcion para cambiar el responsive del data table	
+
+         'select': 'single',
+
+         'drawCallback': function (settings) {
+            api = this.api();
+            var $table = $(api.table().node());
+            
+            if ($table.hasClass('cards')) {
+
+               // Create an array of labels containing all table headers
+               var labels = [];
+               $('thead th', $table).each(function () {
+                  labels.push($(this).text());
+               });
+
+               // Add data-label attribute to each cell
+               $('tbody tr', $table).each(function () {
+                  $(this).find('td').each(function (column) {
+                     $(this).attr('data-label', labels[column]);
+                  });
+               });
+
+               var max = 0;
+               $('tbody tr', $table).each(function () {
+                  max = Math.max($(this).height(), max);
+               }).height(max);
+
+            } else {
+               // Remove data-label attribute from each cell
+               $('tbody td', $table).each(function () {
+                  $(this).removeAttr('data-label');
+               });
+
+               $('tbody tr', $table).each(function () {
+                  $(this).height('auto');
+               });
+            }
+         }
+		
+		
+		
+      });
+	
+	
+		var width = $(window).width();
+		if(width <= 750){
+			$(api.table().node()).toggleClass('cards');
+			api.draw('page');
+		}
+		window.onresize = function(){
+
+			 anchoVentana = window.innerWidth;
+				if(anchoVentana > 1000){
+					$(api.table().node()).removeClass('cards');
+					api.draw('page');
+				}else if(anchoVentana > 750 && anchoVentana < 1000){
+					$(api.table().node()).removeClass('cards');
+					api.draw('page');
+				}else{
+				  $(api.table().node()).toggleClass('cards');
+					api.draw('page');
+				}
+		}
+		// ****************************** //
+	
+	
+		
+}
+//Función para guardar o editar
+
+
+function guardaryeditar(e)
+{
+	e.preventDefault(); //No se activará la acción predeterminada del evento
+	$("#btnGuardar").prop("disabled",true);
+	var formData = new FormData($("#formulario")[0]);
+
+	$.ajax({
+		url: "../controlador/resultadoestudiante.php?op=guardaryeditar",
+	    type: "POST",
+	    data: formData,
+	    contentType: false,
+	    processData: false,
+
+	    success: function(datos)
+	    {   
+	          alertify.success(datos);	          
+	          mostrarform(false);
+	          tabla.ajax.reload();
+	    }
+
+	});
+	limpiar();
+}
+
+function mostrar(id_credencial)
+{
+	$.post("../controlador/resultadoestudiante.php?op=mostrar",{id_credencial : id_credencial}, function(data, status)
+	{
+
+		data = JSON.parse(data);		
+		$("#resultados").html("");
+		$("#resultados").append(data["0"]["0"]);
+		$("#myModalResultados").modal("show");
+		
+
+ 	});
+}
+
+//Función para desactivar registross
+function eliminar(id_credencial)
+{
+	alertify.confirm("¿Está Seguro de eliminar el registro?", function(result){
+		if(result)
+        {
+        	$.post("../controlador/resultadoestudiante.php?op=eliminar", {id_credencial : id_credencial}, function(e){
+				
+				if(e=='null'){
+					alertify.success("Eliminado correctamente");
+					tabla.ajax.reload();
+				}
+				else{
+					alertify.error("Error")
+				}
+        	});	
+        }
+	})
+}
+
+
+
+init();

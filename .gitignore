@@ -1,0 +1,7 @@
+calendarapi/
+*.txt
+*.log
+/vendor/
+/temp/
+/files/pea/
+config/
