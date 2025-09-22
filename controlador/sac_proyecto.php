@@ -467,7 +467,7 @@ switch ($_GET["op"]) {
 								</div>
 							</div>
 							<div class="col">
-								<p class="small text-secondary mb-1">Proyectos/objetivos</p>
+								<p class="small text-secondary mb-1">Objetivos</p>
 								<h4 class="fw-medium"  class="btn btn-link">' . count($proyectos) . '</h4>
 							</div>
 						</div>
@@ -783,10 +783,10 @@ switch ($_GET["op"]) {
 								<thead>
 									<tr>
 										<th> Eje estrategico</th>
-										<th> Proyecto</th>
+										<th> Objetivos</th>
 										<th> Meta</th>
-										<th> Institucionales</th>
-										<th> Programa</th>
+										<th> ---</th>
+										<th> --</th>
 										<th> Responsable</th>
 										<th> Corresponsable</th>
 										<th> Recursos</th>
@@ -1007,7 +1007,7 @@ switch ($_GET["op"]) {
 									<div class="col">
 										<div class="fs-14 line-height-18">
 											<span class="">Resultados</span> <br>
-											<span class="text-semibold fs-16 titulo-2 fs-18 line-height-16"> Proyectos</span>
+											<span class="text-semibold fs-16 titulo-2 fs-18 line-height-16"> Objetivos</span>
 										</div>
 									</div>
 								</div>
@@ -1020,7 +1020,7 @@ switch ($_GET["op"]) {
 		<div class="panel-body table-responsive p-4" id="ver_tabla_proyecto">
 			<table id="ver_tabla_plan" class="table" style="width:100%">';
 		$data[0] .= '<thead>';
-		$data[0] .= '<th> Proyectos</th>';
+		$data[0] .= '<th> Objetivos</th>';
 		$data[0] .= '</thead>';
 		$data[0] .= '<tbody class="parrafo-normal fs-14">';
 		for ($a = 0; $a < count($listar_proyectos); $a++) {
@@ -1167,7 +1167,7 @@ switch ($_GET["op"]) {
 							<table id="ver_tabla_plan" class="table" style="width:100%">';
 		$data[0] .= '<thead>';
 		$data[0] .= '<tr>';
-		$data[0] .= '<th> Proyecto</th>';
+		$data[0] .= '<th> Objetivo</th>';
 		$data[0] .= '<th>Meta</th>';
 		$data[0] .= '</tr>';
 		$data[0] .= '</thead>';
@@ -1298,7 +1298,7 @@ switch ($_GET["op"]) {
 								<div class="col-auto">
 									<div class="col-12 fs-14 line-height-18">
 										<span class="">Resultados</span> <br>
-										<span class="text-semibold fs-20 parrafo-normal">Acciones</span>
+										<span class="text-semibold fs-20 parrafo-normal">Estrategias</span>
 									</div>
 								</div>
 							</div>
@@ -1310,8 +1310,8 @@ switch ($_GET["op"]) {
 							<table id="ver_tabla_plan" class="table" style="width:100%">';
 		$data[0] .= '<thead>';
 		$data[0] .= '<tr>';
-		$data[0] .= '<th> Proyecto</th>';
-		$data[0] .= '<th>Acción</th>';
+		$data[0] .= '<th> Objetivos</th>';
+		$data[0] .= '<th>Estrategia</th>';
 		$data[0] .= '<th>Cargo</th>';
 		$data[0] .= '</tr>';
 		$data[0] .= '</thead>';
@@ -1372,7 +1372,7 @@ switch ($_GET["op"]) {
 		<div class="panel-body table-responsive p-4" id="ver_tabla_proyecto">
 			<table id="ver_tabla_plan" class="table" style="width:100%">';
 		$data[0] .= '<thead>';
-		$data[0] .= '<th> Proyecto</th>';
+		$data[0] .= '<th> Objetivos</th>';
 		$data[0] .= '<th> Meta</th>';
 		$data[0] .= '<th> Acciones a punto de vencer</th>';
 		$data[0] .= '<th> Mes a vencer</th>';

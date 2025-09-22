@@ -32,12 +32,16 @@ if (!isset($_SESSION["usuario_nombre"])) {
                     </button>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="nombre_tarea">Nombre Tarea</label>
+                    <label for="nombre_tarea">Nombre Acción</label>
                     <textarea rows="2" class="form-control" id="nombre_tarea" name="nombre_tarea" required></textarea>
                 </div>
                 <div class="form-group mb-2">
                     <label for="fecha_tarea">Fecha Tarea</label>
                     <input type="date" class="form-control" id="fecha_tarea" name="fecha_tarea" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="presupuesto">Presupuesto</label>
+                    <input type="text" class="form-control" id="presupuesto" name="presupuesto">
                 </div>
                 <div class="form-group mb-2">
                     <label for="responsable_tarea">Responsable</label>
@@ -47,7 +51,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                 </div>
                 <input type="hidden" id="id_accion_tarea" name="id_accion_tarea">
                 <input type="hidden" id="id_meta_tarea" name="id_meta_tarea">
-                <button type="submit" class="btn bg-purple btn-sm w-100">Crear tarea</button>
+                <button type="submit" class="btn bg-purple btn-sm w-100">Crear acción</button>
             </form>
         </div>
 
@@ -81,7 +85,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                     <div class="col-12 px-4">
                         <div class="col-12 text-right d-none">
                             <button type="button" class="tooltip-agregar btn bg-purple btn-flat btn-xs" onclick="crear_meta()" title="Agregar metas" data-toggle="tooltip" data-placement="top">
-                                <i class="fas fa-flag-checkered"></i> Agregar metas
+                                <i class="fas fa-flag-checkered"></i> Agregar meta
                             </button>
                         </div>
                         <div class="col-12 text-right">
@@ -170,7 +174,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                         <th>Acciones/tareas</th>
                         <th>Fecha de inicio</th>
                         <th>Fecha de vencimiento</th>
-                        <th>Eje estratégico</th>
+                        <th>Eje temático</th>
                        
                     </thead>
                     <tbody>
@@ -225,7 +229,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                                 <div class="form-group mb-3 position-relative check-valid">
                                     <div class="form-floating">
                                         <select value="" required="" class="form-control border-start-0 selectpicker" data-live-search="true" data-required="true" name="nombre_proyectos" id="nombre_proyectos"></select>
-                                        <label>Proyectos</label>
+                                        <label>Objetivos</label>
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">Please enter valid input</div>
@@ -519,7 +523,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                                 <div class="form-group mb-3 position-relative check-valid">
                                     <div class="form-floating">
                                         <select value="" required="" class="form-control border-start-0 selectpicker" data-live-search="true" name="id_eje" id="id_eje" onChange="mostrarproyectos_insertar(this.value)"></select>
-                                        <label>Ejes</label>
+                                        <label>Ejes temáticos</label>
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">Please enter valid input</div>
@@ -529,7 +533,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                                 <div class="form-group mb-3 position-relative check-valid">
                                     <div class="form-floating">
                                         <select value="" required="" class="form-control border-start-0 selectpicker" data-live-search="true" data-required="true" name="id_proyecto" id="id_proyecto"></select>
-                                        <label>Proyectos</label>
+                                        <label>Objetivos</label>
                                     </div>
                                 </div>
                                 <div class="invalid-feedback">Please enter valid input</div>
@@ -595,7 +599,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                             </div>
                             <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                                 <input type="number" class="d-none id_meta" id="id_meta" name="id_meta">
-                                <button class="btn btn-success" type="submit" id="btnGuardometa"><i class="fa fa-save"></i> Agregar tarea</button>
+                                <button class="btn btn-success" type="submit" id="btnGuardometa"><i class="fa fa-save"></i> Agregar meta</button>
                             </div>
                         </form>
                     </div>

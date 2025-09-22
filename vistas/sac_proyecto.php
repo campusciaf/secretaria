@@ -134,7 +134,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                                                         <div class="col-auto">
                                                             <div class="col-12 fs-14 line-height-18">
                                                                 <span class="">Resultados</span> <br>
-                                                                <span class="text-semibold fs-20 parrafo-normal">Tareas</span>
+                                                                <span class="text-semibold fs-20 parrafo-normal">Acciones</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -148,12 +148,12 @@ if (!isset($_SESSION["usuario_nombre"])) {
                                             <table id="tbllistadotareas" class="table" style="width:100%">
                                                 <thead class="text-center">
                                                     <th>Meta</th>
-                                                    <th>Acción</th>
-                                                    <th>Nombre Tarea</th>
+                                                    <th>Estrategias</th>
+                                                    <th>Nombre Acción</th>
                                                     <th>Fecha entrega</th>
                                                     <th>Link evidencia</th>
                                                     <th>Nombre Funcionario</th>
-                                                    <th>Estado Tarea</th>
+                                                    <th>Estado acción</th>
                                                     <th>Estado Vencida</th>
                                                     <th>Días</th>
                                                 </thead>
@@ -291,7 +291,7 @@ if (!isset($_SESSION["usuario_nombre"])) {
                                             <table id="tbllistaacciones" class="table" style="width:100%">
                                                 <thead>
                                                     <th>Opciones</th>
-                                                    <th>Nombre Acción</th>
+                                                    <th>Nombre Estrategia</th>
                                                     <th>Meta</th>
                                                 </thead>
                                                 <tbody class="parrafo-normal fs-14">

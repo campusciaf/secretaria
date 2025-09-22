@@ -179,7 +179,7 @@ switch ($_GET["op"]) {
 
 																	<div class="col-12 p-2 line-height-16">
 																		
-																		<div class="fs-14 font-weight-bolder pb-2">Opción de mejora</div>
+																		<div class="fs-14 font-weight-bolder pb-2">Opción de mejoras</div>
 																		<div class="fs-12 ml-4">' . $plan_mejoramiento . '</div>
 																	</div>
 
@@ -471,7 +471,7 @@ switch ($_GET["op"]) {
 								<span class="nombremeta-editable pointer" title="' . htmlspecialchars($nombremeta) . '" data-id="' . $id_meta . '" data-nombre="' . htmlspecialchars($nombremeta) . '">' . htmlspecialchars($nombremeta) . '</span>
 							</div>
 							<div class="" style="width:20px; padding-top:12px">
-								<a onclick="detalle(' . $id_meta . ')" class="text-primary pointer" title="Ver detalles de la meta">
+								<a onclick="detalle(' . $id_meta . ')" class="text-primary pointer" title="Ver detalles de la acción">
 									<i class="fa-solid fa-circle-info "></i>
 								</a>
 							</div>
@@ -481,10 +481,10 @@ switch ($_GET["op"]) {
 								</button>
 								<div class="dropdown-menu">
 									<a class="dropdown-item" onclick="detalle(' . $id_meta . ')">Abrir detalles</a>
-									<a class="dropdown-item" href="#">Proyecto</a>
-									<a class="dropdown-item" onclick="acciones(' . $id_meta . ')" >Acciones y tareas</a>
-									<a class="dropdown-item" href="#">Condiciones</a>
-									<a class="dropdown-item" onclick="eliminar_meta_listar_dependencia(' . $id_meta . ')" >Eliminar Meta</a>
+									<a class="dropdown-item" href="#">Objetivos</a>
+									<a class="dropdown-item" onclick="acciones(' . $id_meta . ')" >Estrategias y acciones</a>
+									
+									<a class="dropdown-item" onclick="eliminar_meta_listar_dependencia(' . $id_meta . ')" >Eliminar Acción</a>
 								</div>
 							</div>
 						</div>',
@@ -549,14 +549,17 @@ switch ($_GET["op"]) {
 					<div class="col-12">
 						<div class="row">
 							<div class="col-12 p-2 line-height-16">
-								<div class="fs-14 font-weight-bolder pb-2">Proyecto</div>
+								<div class="fs-14 font-weight-bolder pb-2">Obejtivo</div>
 								<div class="fs-12 ml-4">' . $buscarproyecto["nombre_proyecto"]  . '</div>
 							</div>
 							<div class="col-12 p-2 line-height-16">
-								<div class="fs-14 font-weight-bolder pb-2">Opción de mejora</div>
+								<div class="fs-14 font-weight-bolder pb-2">Opción de mejoras</div>
 								<div class="fs-12 ml-4">' . $plan_mejoramiento . '</div>
 							</div>	
-							<div class="col-6 p-2">';
+							<div class="col-12 p-2 line-height-16">
+								<div class="fs-14 font-weight-bolder pb-2">Estrategias</div>
+							</div>	
+							<div class="col-6 p-2 d-none">';
 		// Condiciones institucionales
 		$condicionesinstitucionales = $sacListarDependencia->listarCondicionInstitucionalMeta($id_meta);
 		$data[0] .= '<div><b>Condiciones Institucionales</b></div>';
@@ -566,7 +569,7 @@ switch ($_GET["op"]) {
 		}
 		$data[0] .= '
 		</div>
-		<div class="col-6 p-2">';
+		<div class="col-6 p-2 d-none">';
 		// Condiciones de programa
 		$condicionesdeprograma = $sacListarDependencia->listarCondicionProgramaMeta($id_meta);
 		$data[0] .= '<div><b>Condiciones de programa:</b></div>';
@@ -871,14 +874,14 @@ switch ($_GET["op"]) {
 					</div>
 					<div class="col-12 p-2 ">
 						<a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-							<i class="fas fa-plus"></i> Nueva acción
+							<i class="fas fa-plus"></i> Nueva estrategia
 						</a>
 					</div>
 					<div class="col-12 collapse" id="collapseExample">
 						<form class="row" name="formularioaccionguardar" id="formularioaccionguardar" method="POST">
 							<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12">
 								<div class="form-group mb-3 position-relative check-valid">
-									<label>¿Nombre de la acción?</label>
+									<label>¿Nombre de la estrategia?</label>
 									<div class="form-floating">
 										<textarea rows="3" type="text" placeholder="" value="" class="form-control border-start-0" name="nombre_accion" id="nombre_accion" required></textarea>
 									</div>
@@ -908,7 +911,7 @@ switch ($_GET["op"]) {
 							</div>
 							<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<input type="number" class="d-none" id="id_meta_accion" name="id_meta_accion" value="' . $id_meta . '">
-								<button class="btn btn-primary btn-block" type="submit" id="btnGuardarAccion"><i class="fa fa-save"></i> Guardar acción</button>
+								<button class="btn btn-primary btn-block" type="submit" id="btnGuardarAccion"><i class="fa fa-save"></i> Guardar estrategia</button>
 							</div>
 						</form>
 					</div>';
@@ -1004,7 +1007,7 @@ switch ($_GET["op"]) {
 												<div class="btn-group">
 													<button class="btn bg-purple btn-xs d-none" onclick="CrearTarea(' . $id_accion . ', ' . $id_meta . ')"><i class="fas fa-plus-circle"></i> tarea</button>
 													<button class="btn bg-purple btn-xs" onclick="CrearTareaPopover(event,' . $id_accion . ', ' . $id_meta . ')">
-														<i class="fas fa-plus-circle"></i> tareas
+														<i class="fas fa-plus-circle"></i> acciones
 													</button>
 													
 												</div>
